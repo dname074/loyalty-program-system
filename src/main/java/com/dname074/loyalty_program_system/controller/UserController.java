@@ -2,7 +2,6 @@ package com.dname074.loyalty_program_system.controller;
 
 import com.dname074.loyalty_program_system.dto.UserDto;
 import com.dname074.loyalty_program_system.mapper.UserMapper;
-import com.dname074.loyalty_program_system.model.User;
 import com.dname074.loyalty_program_system.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
