@@ -1,28 +1,37 @@
 package com.dname074.loyalty_program_system.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@Entity
+@Table(
+        name="User",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "registrationDate")
+        }
+)
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private LocalDateTime registrationDate;
-    private static Long userAmount = 0L;
 
-    @Autowired
-    public User(String firstName, String lastName, String email) {
-        userAmount++;
-        this.id = userAmount;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    @PrePersist
+    private void setNowDateTime() {
         this.registrationDate = LocalDateTime.now();
     }
 }
