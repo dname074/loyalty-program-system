@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,6 +34,8 @@ public class LoyaltyProgram {
     private LocalDate startDate;
     private LocalDate endDate;
     private Period validityPeriod;
+    @OneToMany(mappedBy = "program")
+    private List<Membership> memberships;
 
     @PrePersist
     @PreUpdate
